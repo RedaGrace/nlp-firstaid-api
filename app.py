@@ -16,6 +16,7 @@ import os
 
 # initialize the recognizer
 r = sr.Recognizer()
+translator = Translator()
 
 app = Flask(__name__)
 
