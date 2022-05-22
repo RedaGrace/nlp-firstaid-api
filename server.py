@@ -17,6 +17,12 @@ r = sr.Recognizer()
 
 app = Flask(__name__)
 
+@app.route('/', methods = ['GET'])
+def home_page():
+    data_set = {'Page': 'Home', 'Message': "Let's get started and send me your symptoms", 'Timestamp': time.time()}
+    json_dump = json.dumps(data_set)
+    return 
+
 @app.route('/firstaid', methods=['POST'])
 def predict():
     # get audio file and save it
