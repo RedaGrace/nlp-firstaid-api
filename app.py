@@ -5,7 +5,7 @@ Created on Sun May 22 06:17:52 2022
 @author: LAPTOP
 """
 import speech_recognition as sr
-
+from waitress import serve
 from flask import Flask, request, jsonify
 import random
 import os
@@ -47,4 +47,5 @@ def predict():
 
 if __name__=='__main__':
     port = int(os.environ.get('PORT', 5000))
-    app.run(host='0.0.0.0', port=port, debug=True)
+    #app.run(host='0.0.0.0', port=port, debug=True)
+    serve(app, host='0.0.0.0', port=port, debug=True)
