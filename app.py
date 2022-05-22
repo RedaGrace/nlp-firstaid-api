@@ -5,6 +5,8 @@ Created on Sun May 22 06:17:52 2022
 @author: LAPTOP
 """
 import speech_recognition as sr
+from googletrans import Translator, constants
+
 from waitress import serve
 from flask import Flask, request, jsonify
 import random
@@ -38,11 +40,12 @@ def predict():
         audio_data = r.record(source)
     # recognize (convert from speech to text)
         text = r.recognize_google(audio_data)
-        #print(text)
+        # detect a language
+        detection = translator.detect(text)
     # remove the audio file
     os.remove(file_name)
     # send back the instructions in json format
-    data = {'firstaid_instructions': text}
+    data = {'Language': constants.LANGUAGES[detection.lang], 'firstaid_instructions': text}
     return jsonify(data)
 
 if __name__=='__main__':
