@@ -20,8 +20,7 @@ app = Flask(__name__)
 @app.route('/', methods = ['GET'])
 def home_page():
     data_set = {'Page': 'Home', 'Message': "Let's get started and send me your voice file"}
-    json_dump = json.dumps(data_set)
-    return 
+    return jsonify(data_set)
 
 @app.route('/firstaid', methods=['POST'])
 def predict():
