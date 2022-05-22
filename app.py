@@ -19,7 +19,7 @@ app = Flask(__name__)
 
 @app.route('/', methods = ['GET'])
 def home_page():
-    data_set = {'Page': 'Home', 'Message': "Let's get started and send me your symptoms", 'Timestamp': time.time()}
+    data_set = {'Page': 'Home', 'Message': "Let's get started and send me your voice file", 'Timestamp': time.time()}
     json_dump = json.dumps(data_set)
     return 
 
@@ -47,4 +47,5 @@ def predict():
     return jsonify(data)
 
 if __name__=='__main__':
-    app.run(debug=True)
+    port = int(os.environ.get('PORT', 5000))
+    app.run(host='0.0.0.0', port=port, debug=True)
