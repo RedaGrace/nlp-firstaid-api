@@ -34,22 +34,22 @@ def predict():
     file_name = str(random.randint(0, 10000))
     audio_file.save(file_name)
     # open the file
-    source = sr.AudioFile(file_name) 
-    # listen for the data (load audio to memory)
-    audio_data = r.record(source)
-    # recognize (convert from speech to text)
-    text = r.recognize_google(audio_data)
-    # detect a language
-    detection = translator.detect(text)
-    # create instance of the model class
-    model = nlp_service()
-    # making prediction and getting response
-    response = model.get_response(text)
-    # remove the audio file
-    os.remove(file_name)
-    # send back the instructions in json format
-    data = {'Language': constants.LANGUAGES[detection.lang], 'firstaid_instructions': response}
-    return jsonify(data)
+    with sr.AudioFile(file_name) as source:
+        # listen for the data (load audio to memory)
+        audio_data = r.record(source)
+        # recognize (convert from speech to text)
+        text = r.recognize_google(audio_data)
+        # detect a language
+        detection = translator.detect(text)
+        # create instance of the model class
+        model = nlp_service()
+        # making prediction and getting response
+        response = model.get_response(text)
+        # remove the audio file
+        os.remove(file_name)
+        # send back the instructions in json format
+        data = {'Language': constants.LANGUAGES[detection.lang], 'firstaid_instructions': response}
+        return jsonify(data)
 
 if __name__=='__main__':
     port = int(os.environ.get('PORT', 5000))
