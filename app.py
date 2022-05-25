@@ -44,7 +44,7 @@ def predict():
         # create instance of the model class
         model = nlp_service()
         # making prediction and getting response
-        response = model.get_response(translation)
+        response = model.get_response(translation.text)
         # remove the audio file
         os.remove(file_name)
         # send back the instructions in json format
