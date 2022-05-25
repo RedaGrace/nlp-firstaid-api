@@ -38,17 +38,17 @@ def predict():
         # listen for the data (load audio to memory)
         audio_data = r.record(source)
         # recognize (convert from speech to text)
-        text = r.recognize_google(audio_data)
-        # detect a language
-        detection = translator.detect(text)
+        text_in_arabic = r.recognize_google(audio_data, language="ar-EG")
+        # translate into English
+        translation = translator.translate(text_in_arabic)
         # create instance of the model class
         model = nlp_service()
         # making prediction and getting response
-        response = model.get_response(text)
+        response = model.get_response(translation)
         # remove the audio file
         os.remove(file_name)
         # send back the instructions in json format
-        data = {'Language': constants.LANGUAGES[detection.lang], 'text': text, 'firstaid_instructions': response}
+        data = {'source_text': text_in_arabic, 'translation': translation, 'firstaid_instructions': response}
         return jsonify(data)
 
 if __name__=='__main__':
