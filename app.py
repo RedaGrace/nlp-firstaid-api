@@ -8,7 +8,6 @@ import speech_recognition as sr
 from googletrans import Translator, constants
 from nlp_service import nlp_service
 
-response = nlp_service()
 
 from waitress import serve
 from flask import Flask, request, jsonify
@@ -34,20 +33,18 @@ def predict():
     audio_file = request.files['file']
     file_name = str(random.randint(0, 10000))
     audio_file.save(file_name)
-    # create instance of the model class 
-    #model = nlp_service()
-    # make prediction
-    #instructions = model.predict(file_name)
     # open the file
-    with sr.AudioFile(file_name) as source:
+    source = sr.AudioFile(file_name) 
     # listen for the data (load audio to memory)
-        audio_data = r.record(source)
+    audio_data = r.record(source)
     # recognize (convert from speech to text)
-        text = r.recognize_google(audio_data)
-        # detect a language
-        detection = translator.detect(text)
-        # getting response
-        response = response.get_response(text)
+    text = r.recognize_google(audio_data)
+    # detect a language
+    detection = translator.detect(text)
+    # create instance of the model class
+    model = nlp_service()
+    # making prediction and getting response
+    response = model.get_response(text)
     # remove the audio file
     os.remove(file_name)
     # send back the instructions in json format
