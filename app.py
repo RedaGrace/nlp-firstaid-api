@@ -6,6 +6,9 @@ Created on Sun May 22 06:17:52 2022
 """
 import speech_recognition as sr
 from googletrans import Translator, constants
+from nlp_service import nlp_service
+
+response = nlp_service()
 
 from waitress import serve
 from flask import Flask, request, jsonify
@@ -43,10 +46,12 @@ def predict():
         text = r.recognize_google(audio_data)
         # detect a language
         detection = translator.detect(text)
+        # getting response
+        response = response.get_response(text)
     # remove the audio file
     os.remove(file_name)
     # send back the instructions in json format
-    data = {'Language': constants.LANGUAGES[detection.lang], 'firstaid_instructions': text}
+    data = {'Language': constants.LANGUAGES[detection.lang], 'firstaid_instructions': response}
     return jsonify(data)
 
 if __name__=='__main__':
