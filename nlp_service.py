@@ -12,6 +12,9 @@ import random
 import nltk
 from nltk.stem import WordNetLemmatizer
 
+nltk.download('punkt', quiet=True)
+nltk.download('wordnet', quiet=True)
+
 lemmatizer = WordNetLemmatizer()
 model_path = 'firstaid_model.h5'
 model = keras.models.load_model(model_path)
