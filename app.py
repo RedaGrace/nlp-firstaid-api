@@ -48,7 +48,9 @@ def predict():
         # remove the audio file
         os.remove(file_name)
         # send back the instructions in json format
-        data = {'source_text': text_in_arabic, 'translation': translation.text, 'firstaid_instructions': translator.translate(response, dest="ar")}
+        data = {'source_text': text_in_arabic, 'translation': translation.text,
+                'firstaid_instructions': response,
+               'firstaid_instructions': (translator.translate(response, dest="ar")).text}
         return jsonify(data)
 
 if __name__=='__main__':
