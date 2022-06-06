@@ -30,7 +30,7 @@ def home_page():
 @app.route('/firstaid', methods=['GET'])
 def predict():
     # get audio file and save it
-    User_text = request.args.get('text') # /predict/?text=text
+    User_text = request.args.get('text') # /firstaid/?text=text
     #User_text = request.files['file']
     #file_name = str(random.randint(0, 10000))
     #User_text.save(file_name)
