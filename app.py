@@ -30,28 +30,28 @@ def home_page():
 @app.route('/firstaid', methods=['POST'])
 def predict():
     # get audio file and save it
-    audio_file = request.files['file']
-    file_name = str(random.randint(0, 10000))
-    audio_file.save(file_name)
+    User_text = request.files['file']
+    #file_name = str(random.randint(0, 10000))
+    #User_text.save(file_name)
     # open the file
-    with sr.AudioFile(file_name) as source:
-        # listen for the data (load audio to memory)
-        audio_data = r.record(source)
-        # recognize (convert from speech to text)
-        text_in_arabic = r.recognize_google(audio_data, language="ar-EG")
-        # translate into English
-        translation = translator.translate(text_in_arabic)
-        # create instance of the model class
-        model = nlp_service()
-        # making prediction and getting response
-        response = model.get_response(translation.text)
-        # remove the audio file
-        os.remove(file_name)
-        # send back the instructions in json format
-        data = {'source_text': text_in_arabic, 'translation': translation.text,
-                'firstaid_instructions': response,
-                'firstaid_instructions_in_arabic': (translator.translate(response, dest="ar")).text}
-        return jsonify(data)
+    #with sr.AudioFile(file_name) as source:
+    # listen for the data (load audio to memory)
+    #audio_data = r.record(source)
+    # recognize (convert from speech to text)
+    #text_in_arabic = r.recognize_google(audio_data, language="ar-EG")
+    # translate into English
+    translation = translator.translate(User_text)
+    # create instance of the model class
+    model = nlp_service()
+    # making prediction and getting response
+    response = model.get_response(translation.text)
+    # remove the audio file
+    #os.remove(file_name)
+    # send back the instructions in json format
+    data = {'source_text': User_text, 'translation': translation.text,
+            'firstaid_instructions': response,
+            'firstaid_instructions_in_arabic': (translator.translate(response, dest="ar")).text}
+    return jsonify(data)
 
 if __name__=='__main__':
     port = int(os.environ.get('PORT', 5000))
