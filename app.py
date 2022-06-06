@@ -27,10 +27,11 @@ def home_page():
     data_set = {'Page': 'Home', 'Message': "Let's get started and send me your voice file"}
     return jsonify(data_set)
 
-@app.route('/firstaid', methods=['POST'])
+@app.route('/firstaid', methods=['GET'])
 def predict():
     # get audio file and save it
-    User_text = request.files['file']
+    User_text = request.args.get('text') # /predict/?text=text
+    #User_text = request.files['file']
     #file_name = str(random.randint(0, 10000))
     #User_text.save(file_name)
     # open the file
