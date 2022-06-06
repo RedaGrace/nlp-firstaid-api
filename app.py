@@ -13,6 +13,7 @@ from waitress import serve
 from flask import Flask, request, jsonify
 import random
 import os
+import json
 #from nlp_service import nlp_service  # model class
 
 
@@ -25,7 +26,7 @@ app = Flask(__name__)
 @app.route('/', methods = ['GET'])
 def home_page():
     data_set = {'Page': 'Home', 'Message': "Let's get started and send me your voice file"}
-    return jsonify(data_set)
+    return json.dumps(data_set)
 
 @app.route('/firstaid', methods=['GET'])
 def predict():
@@ -52,7 +53,7 @@ def predict():
     data = {'source_text': User_text, 'translation': translation.text,
             'firstaid_instructions': response,
             'firstaid_instructions_in_arabic': (translator.translate(response, dest="ar")).text}
-    return jsonify(data)
+    return json.dumps(data)
 
 if __name__=='__main__':
     port = int(os.environ.get('PORT', 5000))
