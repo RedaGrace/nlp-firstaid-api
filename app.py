@@ -42,17 +42,20 @@ def predict():
     # recognize (convert from speech to text)
     #text_in_arabic = r.recognize_google(audio_data, language="ar-EG")
     # translate into English
-    translation = translator.translate(User_text)
+    #translation = translator.translate(User_text)
     # create instance of the model class
-    model = nlp_service()
+    #model = nlp_service()
     # making prediction and getting response
-    response = model.get_response(translation.text)
+    #response = model.get_response(translation.text)
     # remove the audio file
     #os.remove(file_name)
     # send back the instructions in json format
-    data = {'source_text': User_text, 'translation': translation.text,
+    data = {'source_text': User_text}
+    '''
+            , 'translation': translation.text,
             'firstaid_instructions': response,
             'firstaid_instructions_in_arabic': (translator.translate(response, dest="ar")).text}
+    '''
     return json.dumps(data)
 
 if __name__=='__main__':
