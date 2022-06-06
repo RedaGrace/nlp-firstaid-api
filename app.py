@@ -46,7 +46,7 @@ def request_page():
     # remove the audio file
     #os.remove(file_name)
     # send back the instructions in json format
-    data = {'source_text': User_text},
+    data = {'source_text': User_text,
             'translation': translation.text,
             'firstaid_instructions': response,
             'firstaid_instructions_in_arabic': (translator.translate(response, dest="ar")).text}
