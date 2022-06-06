@@ -25,13 +25,13 @@ app = Flask(__name__)
 
 @app.route('/', methods = ['GET'])
 def home_page():
-    data_set = {'Page': 'Home', 'Message': "Let's get started and send me your voice file"}
-    return json.dumps(data_set)
+    data_set = {'Page': 'Home', 'Message': "Let's get started and send me your text", 'Timestamp': time.time()}
+    json_dump = json.dumps(data_set)
+    return json_dump
 
-@app.route('/firstaid', methods=['GET'])
-def predict():
-    # get audio file and save it
-    User_text = request.args.get('text') # /firstaid/?text=text
+@app.route('/predict/', methods=['GET'])
+def request_page():
+    symptoms = request.args.get('text') # /predict/?text=text
     #User_text = request.files['file']
     #file_name = str(random.randint(0, 10000))
     #User_text.save(file_name)
@@ -50,13 +50,17 @@ def predict():
     # remove the audio file
     #os.remove(file_name)
     # send back the instructions in json format
-    data = {'source_text': User_text}
+    #data = {'source_text': User_text}
     '''
             , 'translation': translation.text,
             'firstaid_instructions': response,
             'firstaid_instructions_in_arabic': (translator.translate(response, dest="ar")).text}
     '''
-    return json.dumps(data)
+    #return json.dumps(data)
+
+    data = {'source_text': symptoms}
+    data_set = json.dumps(data)
+    return data_set
 
 if __name__=='__main__':
     port = int(os.environ.get('PORT', 5000))
