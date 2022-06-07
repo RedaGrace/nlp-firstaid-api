@@ -20,7 +20,7 @@ model_path = 'firstaid_model.h5'
 model = keras.models.load_model(model_path)
 words = pickle.load(open('words.pkl', 'rb'))
 classes = pickle.load(open('classes.pkl', 'rb'))
-intents = pd.read_json('intents.json')
+intents = pd.read_json('intents.json', encoding = 'utf-8-sig')
 
 class _nlp_service:
     model = None
