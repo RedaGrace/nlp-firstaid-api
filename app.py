@@ -15,7 +15,7 @@ import random
 import os
 import json
 from flask_cors import CORS
-#from nlp_service import nlp_service  # model class
+from nlp_service import nlp_service  # model class
 
 
 # initialize the recognizer
