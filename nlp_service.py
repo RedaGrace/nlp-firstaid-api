@@ -2,8 +2,6 @@
 # coding: utf-8
 
 
-
-
 import tensorflow.keras as keras
 import numpy as np
 import pandas as pd
@@ -75,14 +73,9 @@ def nlp_service():
 
 if __name__=='__main__':
     response = nlp_service()
-    response = response.get_response('i have fever')
+    response = response.get_response()
     
     print(response)
     
-
-
-# In[ ]:
-
-
 
 
