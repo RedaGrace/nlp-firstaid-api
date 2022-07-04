@@ -2,7 +2,7 @@
 # coding: utf-8
 
 
-import tensorflow.keras as keras
+import tensorflow-cpu.keras as keras
 import numpy as np
 import pandas as pd
 import pickle
