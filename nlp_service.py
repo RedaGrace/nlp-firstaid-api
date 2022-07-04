@@ -70,12 +70,12 @@ def nlp_service():
         _nlp_service._instance = _nlp_service()
         _nlp_service.model = keras.models.load_model(model_path)
     return _nlp_service._instance
-'''
+
 if __name__=='__main__':
     response = nlp_service()
-    response = response.get_response()
+    response = response.get_response('i have fever')
     
     print(response)
-'''   
+
 
 
