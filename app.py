@@ -14,7 +14,7 @@ from flask import Flask, request, jsonify
 import random
 import os
 import json
-#from flask_cors import CORS
+from flask_cors import CORS
 #from nlp_service import nlp_service  # model class
 
 
@@ -23,7 +23,7 @@ r = sr.Recognizer()
 translator = Translator()
 
 app = Flask(__name__)
-#CORS(app)
+CORS(app)
 
 @app.route('/', methods = ['GET'])
 def home_page():
