@@ -1,3 +1,3 @@
 # nlp-firstaid-api
 
-**In the Symptoms Checker app the user can use this feature using her/his voice or text and asking for help in emergency situations.**
+**In the Symptoms Checker app the users can use this feature using their voice or text and asking for help in emergencies.**
